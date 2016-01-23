@@ -38,8 +38,10 @@ app.use(function(request, response, next)
 routes.forEach(function(route)
 {
 
-    // app.get('/url', action);
-    app[route.method.toLowerCase()](route.endpoint, actions[route.action]);
+    app[route.method.toLowerCase()](
+        route.endpoint,
+        actions[route.action]
+    );
 
 });
 
