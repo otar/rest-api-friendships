@@ -1,0 +1,6 @@
+
+TO-DO:
+
+1) Dockerify the project.
+2) Generalize tests, create helpers to reduce code size.
+3) Auth users using JWT (JSON Web Tokens)
