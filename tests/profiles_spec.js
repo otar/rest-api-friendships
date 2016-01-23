@@ -1,4 +1,6 @@
 
+'use strict';
+
 var frisby = require('frisby'),
     config = require('../api/config');
 
