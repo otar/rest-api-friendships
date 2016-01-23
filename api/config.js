@@ -6,8 +6,10 @@ module.exports = {
     port: 8080,
 
     neo4j: {
-        host: 'localhost',
-        port: 7474
+        hostname: 'localhost',
+        port: 7474,
+        username: 'neo4j',
+        password: '' // default password is "neo4j"
     }
 
 };
