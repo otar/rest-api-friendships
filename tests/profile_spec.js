@@ -19,11 +19,11 @@ frisby
     .expectJSON('result', {
         firstName: function(value)
         {
-            return value !== '';
+            return expect(value).not.toBe('');
         },
         lastName: function(value)
         {
-            return value !== '';
+            return expect(value).not.toBe('');
         }
     })
     .expectJSONTypes('result', {
