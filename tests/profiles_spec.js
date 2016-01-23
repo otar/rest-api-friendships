@@ -3,7 +3,7 @@ var frisby = require('frisby'),
     config = require('../api/config');
 
 frisby
-    .create('Get all profiles')
+    .create('Lists all user profiles.')
     .get('http://localhost:' + config.port + '/profiles')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
