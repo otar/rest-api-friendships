@@ -19,6 +19,11 @@ frisby
     })
     //////////////////////////////
     .expectJSON('result.*', {
+        id: function(value)
+        {
+            // In neo4j node IDs begin with 0
+            return expect(value).toBeGreaterThan(-1);
+        },
         firstName: function(value)
         {
             return expect(value).not.toBe('');
@@ -29,6 +34,7 @@ frisby
         }
     })
     .expectJSONTypes('result.*', {
+        id: Number,
         firstName: String,
         lastName: String
     })
