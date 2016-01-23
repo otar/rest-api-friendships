@@ -7,11 +7,28 @@ frisby
     .get('http://localhost:' + config.port + '/profiles')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json')
+    //////////////////////////////
     .expectJSON({
         success: true
     })
-    .expectJSON('result.0', {
-        firstName: "Tyrion",
-        lastName: "Lannister"
+    .expectJSONTypes({
+        success: Boolean,
+        result: Array
     })
+    //////////////////////////////
+    .expectJSON('result.*', {
+        firstName: function(value)
+        {
+            return value !== '';
+        },
+        lastName: function(value)
+        {
+            return value !== '';
+        }
+    })
+    .expectJSONTypes('result.*', {
+        firstName: String,
+        lastName: String
+    })
+    //////////////////////////////
     .toss();
