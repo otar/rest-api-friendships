@@ -1,0 +1,26 @@
+{
+  "name": "rest-api-friendships",
+  "version": "1.0.0",
+  "description": "Simple REST API of user friendships backed by Node/Express and Neo4j.",
+  "main": "api/app.js",
+  "scripts": {
+    "start": "node api/app.js",
+    "test": "jasmine-node tests/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otar/rest-api-friendships.git"
+  },
+  "author": "Otar Chekurishvili",
+  "license": "MIT",
+  "homepage": "https://github.com/otar/rest-api-friendships",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "request": "^2.67.0"
+  },
+  "devDependencies": {
+    "frisby": "^0.8.5",
+    "jasmine-node": "^1.14.5"
+  }
+}
