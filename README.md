@@ -12,15 +12,15 @@ Download and install **NodeJS** and **Neo4j** if you don't have them already:
 * https://nodejs.org/en/download/
 * http://neo4j.com/download/
 
-**Database setup and import instructions here.**
+Change API and database configuration in **api/config.js**.
 
-Run API server with this command: `npm start`
+Then run these commands:
+* Install dependencies: `npm install`
+* Populate database with the example data: `npm populate`
+* Run API server: **`npm start`**
+* Optionally run tests: `npm test`
 
-# Testing
-
-You'll need to install [Jasmine](https://jasmine.github.io) globally using NPM in order to run tests: `npm install -g jasmine-node`
-
-Then run tests with this command: `npm test`
+By default API server will be started on this URL: http://localhost:8080/
 
 # Service Endpoints
 
