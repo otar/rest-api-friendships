@@ -34,7 +34,7 @@ frisby
         },
         createdAt: function(value)
         {
-            let timestamp = Math.floor(Date.now() / 1000);
+            let timestamp = Math.floor(Date.now());
             return expect(value).toBeLessThan(timestamp);
         },
         status: 'pending'
