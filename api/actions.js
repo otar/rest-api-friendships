@@ -35,6 +35,7 @@ module.exports = {
                     firstName: user.firstName,
                     lastName: user.lastName
                 }
+                ORDER BY ID(user)
             `,
             function(error, result)
             {
@@ -100,6 +101,7 @@ module.exports = {
                     status: request.status,
                     createdAt: request.createdAt
                 }
+                ORDER BY request.createdAt DESC
             `,
             function(error, result)
             {
