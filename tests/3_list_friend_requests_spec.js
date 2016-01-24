@@ -32,7 +32,7 @@ frisby
         {
             return expect(value).not.toBe('');
         },
-        sentAt: function(value)
+        createdAt: function(value)
         {
             let timestamp = Math.floor(Date.now() / 1000);
             return expect(value).toBeLessThan(timestamp);
@@ -43,7 +43,7 @@ frisby
         id: Number,
         firstName: String,
         lastName: String,
-        sentAt: Number,
+        createdAt: Number,
         status: String
     })
     //////////////////////////////
