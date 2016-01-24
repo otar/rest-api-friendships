@@ -1,7 +1,7 @@
 
 'use strict';
 
- var db = {
+var db = {
 
     cypher: function(statements, callback)
     {
@@ -26,7 +26,16 @@
                     statements: statements
                 }
             },
-            callback
+            function(error, response, result)
+            {
+
+                callback.call(
+                    null, // this
+                    (result.errors.length),
+                    result.results
+                );
+
+            }
         );
 
     },
