@@ -127,7 +127,35 @@ module.exports = {
     createFriendRequest: function(request, response)
     {
 
-        response.jason();
+        if (
+               !helpers.isValidId(request.params.id)
+            || !helpers.isValidId(request.body.requester)
+        )
+        {
+            response.jason();
+        }
+
+        db.query(
+            `
+                MATCH (requester:Profile), (user:Profile)
+                WHERE ID(requester) = ${ request.body.requester }
+                AND ID(user) = ${ request.params.id.trim() }
+                CREATE (requester)-[:FRIEND_REQUEST]->(user)
+                RETURN {
+                    created: true
+                }
+            `,
+            function(error, result)
+            {
+
+                error && response.jason();
+
+                response.jason(true, {
+                    created: true
+                });
+
+            }
+        );
 
     },
 

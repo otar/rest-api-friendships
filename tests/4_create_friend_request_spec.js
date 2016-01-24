@@ -7,9 +7,9 @@ var frisby = require('frisby'),
 frisby
     .create('Requests friendship to a specific user.')
     .post(
-        'http://localhost:' + config.port + '/profiles/1/friend-requests',
+        'http://localhost:' + config.port + '/profiles/' + Math.floor(Math.random() * 10) + '/friend-requests',
         {
-            requester: 2
+            requester: Math.floor(Math.random() * 10)
         },
         {
             json: true
