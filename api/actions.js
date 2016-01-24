@@ -36,7 +36,6 @@ module.exports = {
                     lastName: user.lastName
                 }
             `,
-            {},
             function(error, result)
             {
 
@@ -61,23 +60,24 @@ module.exports = {
     getProfile: function(request, response)
     {
 
+        helpers.isValidId(request.params.id) || response.jason();
+
         db.query(
             `
                 MATCH (user:Profile)
-                WHERE ID(user) = 1
+                WHERE ID(user) = ${ request.params.id.trim() }
                 RETURN {
                     id: ID(user),
                     firstName: user.firstName,
                     lastName: user.lastName
                 }
             `,
-            {},
             function(error, result)
             {
 
                 error && response.jason();
 
-                response.jason(true, result);
+                response.jason(true, result[0].data[0].row[0]);
 
             }
         );

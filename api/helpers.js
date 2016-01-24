@@ -11,7 +11,12 @@ module.exports = {
     isValidId: function(id)
     {
 
-        return (id > -1);
+        return (
+               typeof id !== 'undefined'
+            && !isNaN(parseInt(id))
+            && isFinite(id)
+            && id > -1 // IDs in Neo4j start from 0
+        );
 
     }
 
