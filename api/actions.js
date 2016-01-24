@@ -87,7 +87,38 @@ module.exports = {
     getFriendRequests: function(request, response)
     {
 
-        response.jason();
+        helpers.isValidId(request.params.id) || response.jason();
+
+        db.query(
+            `
+                MATCH (requester:Profile)-[request:FRIEND_REQUEST]->(user:Profile)
+                WHERE ID(user) = ${ request.params.id.trim() }
+                RETURN {
+                    id: ID(request),
+                    firstName: requester.firstName,
+                    lastName: requester.lastName,
+                    status: request.status,
+                    createdAt: request.createdAt
+                }
+            `,
+            function(error, result)
+            {
+
+                error && response.jason();
+
+                var requests = [];
+
+                helpers.each(result[0].data, function(item)
+                {
+
+                    requests.push(item.row[0]);
+
+                });
+
+                response.jason(true, requests);
+
+            }
+        );
 
     },
 
