@@ -4,6 +4,11 @@
 module.exports = [
     {
         method: 'GET',
+        endpoint: '/',
+        action: 'default'
+    },
+    {
+        method: 'GET',
         endpoint: '/profiles',
         action: 'getAllProfiles'
     },
