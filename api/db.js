@@ -26,13 +26,13 @@ var db = {
                     statements: statements
                 }
             },
-            function(error, response, result)
+            function(error, response)
             {
 
                 callback.call(
                     null, // this
-                    (result.errors.length),
-                    result.results
+                    (response.body.errors.length),
+                    response.body.results
                 );
 
             }
@@ -40,14 +40,14 @@ var db = {
 
     },
 
-    query: function(query, parameters, callback)
+    query: function(query, callback)
     {
 
         return db.cypher(
             [
                 {
                     statement: query,
-                    parameters: parameters || {}
+                    parameters: {}
                 }
             ],
             callback
@@ -58,7 +58,19 @@ var db = {
     multiQuery: function(statements, callback)
     {
 
-        return db.cypher(statements, callback);
+        var queries = [];
+
+        statements.forEach(function(statement)
+        {
+
+            queries.push({
+                statement: statement,
+                parameters: {}
+            });
+
+        });
+
+        return db.cypher(queries, callback);
 
     }
 
