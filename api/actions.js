@@ -243,7 +243,28 @@ module.exports = {
     getFriendsOfFriends: function(request, response)
     {
 
-        response.jason();
+        helpers.isValidId(request.params.id) || response.jason();
+
+        db.query(
+            `
+                MATCH (user1:Profile)-[friends:FRIENDS*2..3]->(user2:Profile)
+                WHERE ID(user1) = ${ request.params.id }
+                RETURN {
+                    id: ID(user1),
+                    firstName: user1.firstName,
+                    lastName: user1.lastName,
+                    friendsOfFriends: collect(user2)
+                }
+            `,
+            function(error, result)
+            {
+
+                error && response.jason();
+
+                response.jason(true, result[0].data[0].row[0]);
+
+            }
+        );
 
     }
 
