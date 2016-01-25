@@ -1,15 +1,20 @@
-/*
+
 'use strict';
 
 var frisby = require('frisby'),
     config = require('../api/config');
 
+var validStatuses = [
+    'accepted',
+    'declined'
+];
+
 frisby
-    .create('Requests friendship to a specific user.')
+    .create('Accept or decline a friend request of a specific user.')
     .put(
-        'http://localhost:' + config.port + '/profiles/1/friend-requests/5',
+        'http://localhost:' + config.port + '/profiles/1/friend-requests/1',
         {
-            status: 'accepted'
+            status: validStatuses[Math.floor(Math.random() * validStatuses.length)]
         },
         {
             json: true
@@ -21,7 +26,11 @@ frisby
     .expectJSON({
         success: true,
         result: {
-            status:
+            updated: true,
+            status: function(value)
+            {
+                return validStatuses.indexOf(value) !== -1;
+            }
         }
     })
     .expectJSONTypes({
@@ -29,8 +38,9 @@ frisby
         result: Object
     })
     .expectJSONTypes('result', {
-        created: Boolean
+        updated: Boolean,
+        status: String
     })
     //////////////////////////////
     .toss();
-*/
+

@@ -162,7 +162,43 @@ module.exports = {
     updateFriendRequest: function(request, response)
     {
 
-        response.jason();
+        let validStatuses = [
+            'accepted',
+            'declined'
+        ];
+
+        if (
+               !helpers.isValidId(request.params.id)
+            || !helpers.isValidId(request.params.request_id)
+            || validStatuses.indexOf(request.body.status) === -1
+        )
+        {
+            response.jason();
+        }
+
+        db.query(
+            `
+                MATCH (user:Profile)-[request:FRIEND_REQUEST]->(:Profile)
+                WHERE ID(user) = ${ request.params.id }
+                AND ID(request) = ${ request.params.request_id }
+                SET request.status = '${ request.body.status }'
+                RETURN {
+                    updated: true,
+                    status: '${ request.body.status }'
+                }
+            `,
+            function(error, result)
+            {
+
+                error && response.jason();
+
+                response.jason(true, {
+                    updated: true,
+                    status: request.body.status
+                });
+
+            }
+        );
 
     },
 

@@ -37,7 +37,7 @@ Lists all pending friend requests of a specific user.
 Requests friendship to a specific user. ID of a user requesting friendship should be provided in the POST data, you should submit a JSON with a `requester` parameter. Example CURL request: `curl -H "Content-Type: application/json" -X POST -d '{"requester":"123"}' http://localhost:8080/profiles/1/friend-requests`. By default the "pending" status will be assigned to a newly created friend requests.
 
 ##### PUT /profiles/:id/friend-requests/:request_id
-Used to accept or decline a friend request of a specific user using a :request_id parameter (retrieved from the above endpoint). This will modify status of a friendship request from "pending" to "accepted" or "declined". We will not be deleting a friend request, we might use this data later for analysis...
+Used to accept or decline a friend request of a specific user using a :request_id parameter (retrieved from the above endpoint). You should submit a JSON with a `status` parameter with the value either `accepted` or `declined`. We will not be deleting a friend request, we might use this data later for analysis...
 
 ##### GET /profiles/{profile_id}/friends
 Lists all friends of a specific user.
