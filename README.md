@@ -43,4 +43,4 @@ Used to accept or decline a friend request of a specific user using a :request_i
 Lists all friends of a specific user.
 
 ##### GET /profiles/{profile_id}/friends-of-friends
-Lists all "friends of friends" of a specific user. Goes on a depth of 3rd level.
+Lists all "friends of friends" of a specific user. **Goes on a depth of 3rd level.**
