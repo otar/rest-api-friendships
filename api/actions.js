@@ -205,7 +205,38 @@ module.exports = {
     getFriends: function(request, response)
     {
 
-        response.jason();
+        helpers.isValidId(request.params.id) || response.jason();
+
+        db.query(
+            `
+                MATCH (user1:Profile)-[friends:FRIENDS]->(user2:Profile)
+                WHERE ID(user1) = ${ request.params.id }
+                RETURN {
+                    id: ID(user2),
+                    firstName: user2.firstName,
+                    lastName: user2.lastName,
+                    since: friends.since
+                }
+                ORDER BY friends.since DESC
+            `,
+            function(error, result)
+            {
+
+                error && response.jason();
+
+                var profiles = [];
+
+                helpers.each(result[0].data, function(item)
+                {
+
+                    profiles.push(item.row[0]);
+
+                });
+
+                response.jason(true, profiles);
+
+            }
+        );
 
     },
 
