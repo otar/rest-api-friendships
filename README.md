@@ -16,7 +16,7 @@ Change API and database configuration in **api/config.js**.
 
 Then run these commands:
 * Install dependencies: `npm install`
-* Populate database with the example data: `npm populate`
+* Populate database with the test data, located in *test-data.cypher*. Important, if you already have neo4j server locally you have to reset node ID counter in order tests to succeed. I usually do it by shutting down the service and removing neo4j data: `rm -rf data/graph.db`
 * Run API server: **`npm start`**
 * Optionally run tests: `npm test`
 
